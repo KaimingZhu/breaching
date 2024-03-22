@@ -2,7 +2,7 @@
 @Encoding:      UTF-8 
 @File:          dlg_cifar10.py
 
-@Introduction:  a same executable script as `.ipynb` file, see @Reference for corresponding file
+@Introduction:  a same executable script as `.ipynb` file in `breaching/examples`, see @Reference for detail info.
 @Author:        Kaiming Zhu
 @Date:          2024/3/22 16:56
 @Reference:     ./examples/Deep Leakage from Gradients - Optimization-based Attack - ConvNet CIFAR-10.ipynb

@@ -44,14 +44,19 @@ def report(
             cfg_case,
             setup,
         )
-    if reconstructed_user_data["labels"] is not None:
-        test_label_acc = count_integer_overlap(
-            reconstructed_user_data["labels"].view(-1),
-            true_user_data["labels"].view(-1),
-            maxlength=cfg_case.data.vocab_size,
-        ).item()
-    else:
-        test_label_acc = 0
+
+    test_label_acc = 0
+    if reconstructed_user_data is not None:
+        reconstructed_label = reconstructed_user_data["labels"]
+        true_label = true_user_data["labels"]
+        if cfg_case.data.modality == "vision":
+            test_label_acc = float(reconstructed_label == true_label)
+        elif cfg_case.data.modality == "text":
+            test_label_acc = count_integer_overlap(
+                rec_labels=reconstructed_label.view(-1),
+                true_labels=true_label.view(-1),
+                maxlength=cfg_case.data.vocab_size,
+            ).item()
 
     feat_mse = 0.0
     for idx, payload in enumerate(server_payload):

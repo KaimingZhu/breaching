@@ -44,12 +44,14 @@ breaching.utils.overview(server, user, attacker)
 # make FL simulation
 server_payload = server.distribute_payload()
 shared_data, true_user_data = user.compute_local_updates(server_payload)
+
+# display true data before reconstruction.
 user.plot(true_user_data)
 
 # attack
 reconstructed_user_data, stats = attacker.reconstruct([server_payload], [shared_data], {}, dryrun=cfg.dryrun)
 
-# evalute attack metrics
+# evaluate attack metrics
 metrics = breaching.analysis.report(reconstructed_user_data, true_user_data, [server_payload],
                                     server.model, order_batch=True, compute_full_iip=False,
                                     cfg_case=cfg.case, setup=setup)

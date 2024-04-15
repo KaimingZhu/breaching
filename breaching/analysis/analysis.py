@@ -50,7 +50,9 @@ def report(
         reconstructed_label = reconstructed_user_data["labels"]
         true_label = true_user_data["labels"]
         if cfg_case.data.modality == "vision":
-            test_label_acc = float(reconstructed_label == true_label)
+            correct_label_amount = sum(reconstructed_label == true_label)
+            total_label_amount = len(reconstructed_label)
+            test_label_acc = float(correct_label_amount) / total_label_amount
         elif cfg_case.data.modality == "text":
             test_label_acc = count_integer_overlap(
                 rec_labels=reconstructed_label.view(-1),

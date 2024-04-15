@@ -14,7 +14,7 @@ except ModuleNotFoundError:
     # You only really need this safety net if you want to run these notebooks directly in the examples directory
     # Don't worry about this if you installed the package or moved the notebook to the main directory.
     import os
-    os.chdir("..")
+    os.chdir("../..")
     import breaching
 
 import torch

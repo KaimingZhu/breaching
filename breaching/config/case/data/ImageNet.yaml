@@ -2,7 +2,7 @@ name: ImageNet
 modality: vision
 task: classification
 
-path: "~/data/imagenet"
+path: "~/data/"
 size: 1_281_167
 classes: 1000
 shape:

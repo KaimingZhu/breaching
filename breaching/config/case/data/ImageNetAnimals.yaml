@@ -5,7 +5,7 @@ task: classification
 # This is an ImageNet split with only the first 397 classes
 # which correspond to animals. This reduces the chance of hitting on a "yikes" image
 
-path: "~/data/imagenet"
+path: "~/data/"
 size: 1_281_167
 classes: 397
 shape:

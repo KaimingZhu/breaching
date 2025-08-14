@@ -282,6 +282,8 @@ def dump_metrics(cfg, metrics):
     sanitized_metrics = dict()
     for metric, val in metrics.items():
         try:
+            if torch.is_tensor(val) and val.is_cuda:
+                val = val.cpu()
             sanitized_metrics[metric] = np.asarray(val).item()
         except ValueError:
             sanitized_metrics[metric] = np.asarray(val).tolist()

@@ -10,7 +10,6 @@ import logging
 
 log = logging.getLogger(__name__)
 
-
 def report(
     reconstructed_user_data,
     true_user_data,
@@ -45,10 +44,14 @@ def report(
             setup,
         )
     if reconstructed_user_data["labels"] is not None:
+        if metadata["modality"] == "text":
+            maxlength = cfg_case.data.vocab_size
+        else:
+            maxlength = cfg_case.data.classes
         test_label_acc = count_integer_overlap(
             reconstructed_user_data["labels"].view(-1),
             true_user_data["labels"].view(-1),
-            maxlength=cfg_case.data.vocab_size,
+            maxlength=maxlength,
         ).item()
     else:
         test_label_acc = 0

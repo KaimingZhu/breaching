@@ -7,7 +7,6 @@ from ..cases import construct_dataloader
 
 import copy
 import logging
-import omegaconf
 
 log = logging.getLogger(__name__)
 
@@ -45,9 +44,9 @@ def report(
             setup,
         )
     if reconstructed_user_data["labels"] is not None:
-        try:
+        if metadata["modality"] == "text":
             maxlength = cfg_case.data.vocab_size
-        except omegaconf.errors.ConfigAttributeError:
+        else:
             maxlength = cfg_case.data.classes
         test_label_acc = count_integer_overlap(
             reconstructed_user_data["labels"].view(-1),
